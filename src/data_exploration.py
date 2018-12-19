@@ -7,6 +7,7 @@ import src.labels as labels
 
 reverse_train_labels = dict((v,k) for k,v in labels.label_names.items())
 
+
 def find_most_frequent(train_labels):
     def fill_targets(row):
         row.Target = np.array(row.Target.split(" ")).astype(np.int)
@@ -26,6 +27,7 @@ def find_most_frequent(train_labels):
     plt.figure(figsize=(15, 15))
     sns.barplot(y=target_counts.index.values, x=target_counts.values, order=target_counts.index)
     plt.show()
+    return train_labels
 
 
 def find_most_common_num_target(train_labels):
@@ -36,6 +38,7 @@ def find_most_common_num_target(train_labels):
     plt.xlabel("Number of targets per image")
     plt.ylabel("% of data")
     plt.show()
+    return train_labels
 
 
 def display_targets_correlation(train_labels):
@@ -52,8 +55,8 @@ print(train_labels.head())
 print(train_labels.shape[0])
 #############################################
 
-#find_most_frequent(train_labels)
-#find_most_common_num_target(train_labels)
+train_labels = find_most_frequent(train_labels)
+train_labels = find_most_common_num_target(train_labels)
 #display_targets_correlation(train_labels)
 
 
@@ -66,8 +69,11 @@ def find_counts(special_target, labels):
     counts = counts.sort_values()
     return counts
 
+
+#print(reverse_train_labels)
+#print(reverse_train_labels["Lysosomes"])
 lyso_endo_counts = find_counts("Lysosomes", train_labels)
 
-plt.figure(figsize=(10,3))
-sns.barplot(x=lyso_endo_counts.index.values, y=lyso_endo_counts.values, palette="Blues")
-plt.show()
+# plt.figure(figsize=(10,3))
+# sns.barplot(x=lyso_endo_counts.index.values, y=lyso_endo_counts.values, palette="Blues")
+# plt.show()
