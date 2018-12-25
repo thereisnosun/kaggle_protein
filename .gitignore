@@ -1,0 +1,6 @@
+data/*
+data/train/*
+data/test/*
+*.png
+lib/*
+kaggle_protein_env/*
